@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = window.location.origin.replace('-3000.', '-8080.');
+// const API_BASE = window.location.origin.replace('-3000.', '-8080.');
+const API_BASE = window.location.origin.includes('-3000.')
+  ? window.location.origin.replace('-3000.', '-8080.') // Codespaces環境用
+  : `${window.location.protocol}//${window.location.hostname}:8080`; // AWS / ローカル環境用
 
 function App() {
   const [testUserId, setTestUserId] = useState(1); 
@@ -202,7 +205,7 @@ function App() {
     <div className="app-container">
       <header className="navbar">
         <div className="nav-content">
-          <h1 className="logo" onClick={() => setTargetUserId(null)}>ji-book</h1>
+          <h1 className="logo" onClick={() => setTargetUserId(null)}>J-book</h1>
           
           <div className="test-user-selector">
             <label htmlFor="user-id-select">テスト操作ユーザーID: </label>
